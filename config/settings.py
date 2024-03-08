@@ -48,7 +48,9 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'django_celery_beat',
+
     'users',
+    'habits',
 ]
 
 MIDDLEWARE = [
@@ -201,3 +203,16 @@ CELERY_TASK_TRACK_STARTED = True
 
 # Максимальное время на выполнение задачи
 CELERY_TASK_TIME_LIMIT = 30 * 60
+
+# Настройки для Celery
+CELERY_BEAT_SCHEDULE = {
+    'task-name': {
+        'task': 'habits.tasks.good_habit_sender',  # Путь к задаче
+        'schedule': timedelta(minutes=1),  # Расписание выполнения задачи (например, каждые 10 минут)
+    },
+}
+
+SUPERUSER_PASSWORD = os.getenv('SUPERUSER_PASSWORD')
+SUPERUSER_EMAIL = os.getenv('SUPERUSER_EMAIL')
+
+TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
