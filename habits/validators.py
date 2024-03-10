@@ -29,6 +29,19 @@ class HabitTime120Validator:
             raise serializers.ValidationError("Время выполнения должно быть не больше 120 секунд.")
 
 
+class PeriodValidator:
+    """
+    Проверка на выполнение по периодичности (не реже раз в 7 дней)
+    """
+    def __init__(self, field):
+        self.field = field
+
+    def __call__(self, value):
+        period = value.get(self.field)
+        if period > 7:
+            raise serializers.ValidationError("Периодичность выполнения не реже раза в неделю.")
+
+
 class RelatedHabitIsNiceValidator:
     """
     Проверка на признак приятной привычки

@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from habits.models import Habit
 from habits.validators import RewardOrNiceHabitValidator, HabitTime120Validator, RelatedHabitIsNiceValidator, \
-    NiceHabitNoRewardValidator
+    NiceHabitNoRewardValidator, PeriodValidator
 
 
 class HabitSerializer(serializers.ModelSerializer):
@@ -20,6 +20,7 @@ class HabitCreateUpdateSerializer(serializers.ModelSerializer):
         validators = [
             RewardOrNiceHabitValidator(fields),
             HabitTime120Validator(field='seconds_to_complete'),
+            PeriodValidator(field='period'),
             RelatedHabitIsNiceValidator(fields),
             NiceHabitNoRewardValidator(fields)
         ]
