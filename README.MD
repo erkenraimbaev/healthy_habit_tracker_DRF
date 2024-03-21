@@ -66,4 +66,10 @@
 
 Для быстрой установки зависимостей есть файл requirements.txt
 
+Для  запуска докер контейнера:
+
+docker-compose build
+docker-compose up
+
+
 Приятного пользования!
